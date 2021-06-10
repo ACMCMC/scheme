@@ -1,0 +1,13 @@
+(import (rnrs))
+
+(define (hamming-distance strand-a strand-b)
+    (cond ((not (= (string-length strand-a)
+                   (string-length strand-b)))
+           (error "Different length" "Check"))
+          ((= (string-length strand-a) 0) 0)
+          ((string=? (substring strand-a 0 1)
+                     (substring strand-b 0 1))
+           (hamming-distance (substring strand-a 1 (string-length strand-a))
+                             (substring strand-b 1 (string-length strand-b))))
+          (else (+ 1 (hamming-distance (substring strand-a 1 (string-length strand-a))
+                                       (substring strand-b 1 (string-length strand-b)))))))
